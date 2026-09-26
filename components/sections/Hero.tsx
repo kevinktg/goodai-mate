@@ -8,7 +8,7 @@ import { SURVEY_URL } from "@/lib/links";
 
 export function Hero() {
     return (
-        <section className="relative h-[110vh] w-full flex items-center justify-center overflow-hidden bg-brand-ink">
+        <section className="relative min-h-[100dvh] w-full flex items-center justify-center overflow-hidden bg-brand-ink py-20">
             <div className="container relative z-10 flex flex-col items-center text-center px-4 mt-20">
                 {/* Animated Badge - Minimalist */}
                 <motion.div
