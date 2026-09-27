@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { HamburgerMenuIcon, Cross2Icon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetClose } from "@/components/ui/sheet";
 import { SURVEY_URL } from "@/lib/links";
@@ -26,14 +26,12 @@ export function Navbar() {
         const previous = lastScrollY;
         setLastScrollY(latest);
 
-        // Check if scrolled down for floating effect
         if (latest > 100) {
             setIsScrolled(true);
         } else {
             setIsScrolled(false);
         }
 
-        // Hide/Show logic on scroll direction
         if (latest > previous && latest > 150) {
             setIsHidden(true);
         } else {
@@ -92,7 +90,7 @@ export function Navbar() {
                         asChild
                         size="sm"
                         className={cn(
-                            "h-10 rounded-full px-7 text-base lg:text-lg transition-colors font-normal",
+                            "h-10 rounded-full px-7 text-base lg:text-lg transition-colors font-normal cursor-pointer",
                             isScrolled
                                 ? "bg-brand-ink text-brand-paper hover:bg-brand-coral hover:text-brand-ink"
                                 : "bg-brand-paper text-brand-ink hover:bg-brand-coral"
@@ -108,7 +106,7 @@ export function Navbar() {
                         asChild
                         size="sm"
                         className={cn(
-                            "rounded-full px-4 transition-colors font-medium mr-2",
+                            "rounded-full px-4 transition-colors font-medium mr-2 cursor-pointer",
                             isScrolled
                                 ? "bg-brand-ink text-brand-paper hover:bg-brand-coral hover:text-brand-ink"
                                 : "bg-brand-paper text-brand-ink hover:bg-brand-coral"
@@ -118,15 +116,15 @@ export function Navbar() {
                     </Button>
                     <Sheet>
                         <SheetTrigger asChild>
-                            <Button variant="ghost" size="icon" className="rounded-full" aria-label="Open menu">
-                                <Menu className="w-5 h-5" />
+                            <Button variant="ghost" size="icon" className="rounded-full cursor-pointer" aria-label="Open menu">
+                                <HamburgerMenuIcon className="w-5 h-5" />
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="top" className="w-full h-full bg-brand-paper text-brand-ink border-none p-0">
                             <SheetTitle className="sr-only">Menu</SheetTitle>
                             <div className="flex flex-col h-full items-center justify-center relative">
-                                <SheetClose className="absolute top-6 right-6" aria-label="Close menu">
-                                    <X className="w-6 h-6" />
+                                <SheetClose className="absolute top-6 right-6 cursor-pointer" aria-label="Close menu">
+                                    <Cross2Icon className="w-6 h-6" />
                                 </SheetClose>
                                 <div className="flex flex-col gap-8 text-center">
                                     {navLinks.map((link) => (

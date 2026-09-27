@@ -1,35 +1,35 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Zap, Shield, Globe, Cpu } from "lucide-react";
+import { GlobeIcon, LockClosedIcon, GearIcon, LightningBoltIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
 
 const features = [
     {
         title: "BUSINESS WORKFLOWS",
         description: "One clear end-to-end process, striking that task off your todo list forever.",
-        icon: Globe,
+        icon: GlobeIcon,
         accent: "bg-brand-coral",
         className: "col-span-1 md:col-span-2 lg:col-span-2",
     },
     {
         title: "It's Your Call",
         description: "You pick where your data lives, how much work gets done, and who has access.",
-        icon: Shield,
+        icon: LockClosedIcon,
         accent: "bg-brand-eucalyptus",
         className: "col-span-1 md:col-span-1 lg:col-span-1",
     },
     {
         title: "Systems that talk",
         description: "We connect the tools you already use so information stops falling through the gaps.",
-        icon: Cpu,
+        icon: GearIcon,
         accent: "bg-brand-eucalyptus",
         className: "col-span-1 md:col-span-1 lg:col-span-1",
     },
     {
         title: "Less chasing",
-        description: "You'll no longer dread updates, reminders or alarms  as they now signal a job getting done.",
-        icon: Zap,
+        description: "You'll no longer dread updates, reminders or alarms as they now signal a job getting done.",
+        icon: LightningBoltIcon,
         accent: "bg-brand-coral",
         className: "col-span-1 md:col-span-2 lg:col-span-2",
     },
@@ -37,15 +37,15 @@ const features = [
 
 export function Features() {
     return (
-        <section id="features" className="py-40 px-6 bg-brand-paper text-brand-ink">
+        <section id="features" className="py-32 md:py-40 px-6 bg-brand-paper text-brand-ink">
             <div className="max-w-7xl mx-auto">
-                <div className="mb-24 md:flex justify-between items-end">
+                <div className="mb-20 md:flex justify-between items-end">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-          className="text-4xl md:text-6xl font-large tracking-wide leading-[1.15]"
+                        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                        className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.15]"
                     >
                         Less admin. <br /> <span className="text-brand-coral">More time.</span>
                     </motion.h2>
@@ -53,14 +53,14 @@ export function Features() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="text-brand-ink/70 max-w-sm mt-8 md:mt-0 text-lg font-light"
+                        transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.1 }}
+                        className="text-brand-ink/70 max-w-sm mt-8 md:mt-0 text-base md:text-lg font-light leading-relaxed"
                     >
                         Invest in yourself, Chuck us all the hassle, we&apos;ll sort it for ya... better quality of life and stuff.
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {features.map((feature, index) => (
                         <FeatureCard key={index} className={feature.className}>
                             <div className="relative z-10 flex flex-col h-full justify-between p-8">
@@ -68,8 +68,8 @@ export function Features() {
                                     <feature.icon className="w-5 h-5" />
                                 </div>
                                 <div>
-                                    <h3 className="text-2xl font-medium mb-3 tracking-wide">{feature.title}</h3>
-                                    <p className="text-brand-ink/70 leading-relaxed">{feature.description}</p>
+                                    <h3 className="text-2xl font-medium mb-3 tracking-tight">{feature.title}</h3>
+                                    <p className="text-brand-ink/70 leading-relaxed text-sm md:text-base">{feature.description}</p>
                                 </div>
                             </div>
                         </FeatureCard>
@@ -84,7 +84,7 @@ function FeatureCard({ children, className = "" }: { children: React.ReactNode; 
     return (
         <div
             className={cn(
-                "relative border border-brand-ink bg-brand-paper overflow-hidden shadow-[4px_4px_0_var(--brand-ink)]",
+                "relative border border-brand-ink bg-brand-paper overflow-hidden shadow-[4px_4px_0_var(--brand-ink)] rounded-2xl transition-transform hover:-translate-y-1 duration-200",
                 className
             )}
         >

@@ -14,15 +14,14 @@ const DEFAULT_ITEMS = ["WORKFLOWS", "AUTOMATION", "SYSTEMS", "LESS ADMIN", "MORE
 
 export function InfiniteMarquee({
     className,
-    speed = 20,
+    speed = 25,
     items = DEFAULT_ITEMS
 }: InfiniteMarqueeProps) {
 
-    // ⚡ Bolt: Memoize the rendered items to avoid O(N) operations and
-    // redundant DOM element re-creations on every render.
-    const renderedItems = useMemo(() => {
-        return [...items, ...items, ...items, ...items].map((item, i) => (
-            <span key={i} className="text-sm md:text-base font-medium tracking-[0.3em] text-brand-ink mx-8 uppercase">
+    // Memoize the rendered items to avoid redundant DOM re-creations.
+    const renderedSet = useMemo(() => {
+        return items.map((item, i) => (
+            <span key={i} className="text-sm md:text-base font-mono font-medium tracking-[0.3em] text-brand-ink mx-8 uppercase">
                 {item}
             </span>
         ));
@@ -30,11 +29,9 @@ export function InfiniteMarquee({
 
     return (
         <div className={cn("relative w-full overflow-hidden bg-brand-coral py-6 border-y border-brand-ink select-none", className)}>
-            {/* Gradient Masks for Edge Blur */}
-
             <motion.div
                 className="flex whitespace-nowrap"
-                animate={{ x: [0, -1000] }} // Arbitrary large number, better implemented with percent or measure
+                animate={{ x: ["0%", "-50%"] }}
                 style={{ width: "max-content" }}
                 transition={{
                     x: {
@@ -45,8 +42,9 @@ export function InfiniteMarquee({
                     },
                 }}
             >
-                {/* Render items 4 times to ensure no gaps on large screens */}
-                {renderedItems}
+                {/* Two identical sets for seamless infinite percentage translation */}
+                <div className="flex whitespace-nowrap">{renderedSet}{renderedSet}{renderedSet}</div>
+                <div className="flex whitespace-nowrap">{renderedSet}{renderedSet}{renderedSet}</div>
             </motion.div>
         </div>
     );
