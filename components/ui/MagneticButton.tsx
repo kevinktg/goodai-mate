@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, type HTMLMotionProps } from "framer-motion";
+import { useRef } from "react";
+import { motion, useMotionValue, useSpring, type HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface MagneticButtonProps extends HTMLMotionProps<"button"> {
@@ -17,20 +17,28 @@ export function MagneticButton({
     ...props
 }: MagneticButtonProps) {
     const ref = useRef<HTMLButtonElement>(null);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
+
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+
+    const springX = useSpring(x, { stiffness: 150, damping: 15, mass: 0.1 });
+    const springY = useSpring(y, { stiffness: 150, damping: 15, mass: 0.1 });
 
     const handleMouseMove = (e: React.MouseEvent) => {
+        if (!ref.current) return;
         const { clientX, clientY } = e;
-        const { left, top, width, height } = ref.current!.getBoundingClientRect();
+        const { left, top, width, height } = ref.current.getBoundingClientRect();
 
-        const x = clientX - (left + width / 2);
-        const y = clientY - (top + height / 2);
+        const deltaX = clientX - (left + width / 2);
+        const deltaY = clientY - (top + height / 2);
 
-        setPosition({ x: x * strength, y: y * strength });
+        x.set(deltaX * strength);
+        y.set(deltaY * strength);
     };
 
     const handleMouseLeave = () => {
-        setPosition({ x: 0, y: 0 });
+        x.set(0);
+        y.set(0);
     };
 
     return (
@@ -38,9 +46,9 @@ export function MagneticButton({
             ref={ref}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            animate={{ x: position.x, y: position.y }}
-            transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-            className={cn("focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-coral outline-none", className)}
+            style={{ x: springX, y: springY }}
+            whileTap={{ scale: 0.98 }}
+            className={cn("focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-coral outline-none cursor-pointer", className)}
             {...props}
         >
             {children}
