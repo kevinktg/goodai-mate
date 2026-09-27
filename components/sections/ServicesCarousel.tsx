@@ -7,7 +7,7 @@ const Carousel = dynamic(() => import("@/components/carousel/Carousel"), {
   loading: () => (
     <section
       aria-label="Loading services carousel"
-      className="min-h-[640px] min-h-[100dvh] bg-brand-paper"
+      className="min-h-[max(640px,100dvh)] bg-brand-paper"
     />
   ),
 });
