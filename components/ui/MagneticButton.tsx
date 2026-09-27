@@ -47,7 +47,8 @@ export function MagneticButton({
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={{ x: springX, y: springY }}
-            className={cn("focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-coral outline-none cursor-pointer active:scale-[0.98]", className)}
+            whileTap={{ scale: 0.98 }}
+            className={cn("focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-coral outline-none cursor-pointer", className)}
             {...props}
         >
             {children}
