@@ -6,31 +6,29 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
-    Activity,
-    BellRing,
-    BriefcaseBusiness,
-    CalendarDays,
-    Check,
-    Layers,
-    Mail,
-    Send,
-    Workflow,
-} from "lucide-react";
+    EnvelopeClosedIcon,
+    CalendarIcon,
+    ArchiveIcon,
+    PaperPlaneIcon,
+    CheckIcon,
+    BellIcon,
+    ActivityLogIcon,
+    LayersIcon,
+    GearIcon,
+} from "@radix-ui/react-icons";
 
 const workflowInputs = [
-    { label: "Email", icon: Mail },
-    { label: "Calendar", icon: CalendarDays },
-    { label: "Jobs", icon: BriefcaseBusiness },
+    { label: "Email", icon: EnvelopeClosedIcon },
+    { label: "Calendar", icon: CalendarIcon },
+    { label: "Jobs", icon: ArchiveIcon },
 ];
 
 const workflowOutputs = [
-    { label: "Reply sent", icon: Send },
-    { label: "Job booked", icon: Check },
-    { label: "Team updated", icon: BellRing },
+    { label: "Reply sent", icon: PaperPlaneIcon },
+    { label: "Job booked", icon: CheckIcon },
+    { label: "Team updated", icon: BellIcon },
 ];
 
-// PERFORMANCE PATTERN: Extract static arrays to the module scope to avoid recreating them on every render
-// This preserves referential equality and reduces garbage collection overhead in functional components.
 const SETTINGS_RULES = [1, 2, 3];
 const WORKFLOW_INPUT_PATHS = [
     "M 28 18 C 39 18 39 50 50 50",
@@ -59,12 +57,12 @@ export function ProductDemo() {
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="text-3xl md:text-5xl font-bold tracking-wide mb-4"
+                        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                        className="text-3xl md:text-5xl font-bold tracking-tight mb-4"
                     >
                         See the workflow.
                     </motion.h2>
-                    <p className="text-muted-foreground max-w-xl mx-auto">
+                    <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
                         One place to see what is moving, what is stuck, and what the system handled for you.
                     </p>
                 </div>
@@ -74,26 +72,26 @@ export function ProductDemo() {
                         <TabsList className="bg-brand-paper p-1 rounded-full border border-brand-ink">
                             <TabsTrigger
                                 value="dashboard"
-                                className="rounded-full px-6 py-2 text-sm font-medium text-brand-ink data-[state=active]:bg-brand-ink data-[state=active]:text-brand-paper transition-colors"
+                                className="rounded-full px-6 py-2 text-sm font-medium text-brand-ink data-[state=active]:bg-brand-ink data-[state=active]:text-brand-paper transition-colors cursor-pointer"
                             >
                                 Today
                             </TabsTrigger>
                             <TabsTrigger
                                 value="analytics"
-                                className="rounded-full px-6 py-2 text-sm font-medium text-brand-ink data-[state=active]:bg-brand-ink data-[state=active]:text-brand-paper transition-colors"
+                                className="rounded-full px-6 py-2 text-sm font-medium text-brand-ink data-[state=active]:bg-brand-ink data-[state=active]:text-brand-paper transition-colors cursor-pointer"
                             >
                                 Jobs
                             </TabsTrigger>
                             <TabsTrigger
                                 value="settings"
-                                className="rounded-full px-6 py-2 text-sm font-medium text-brand-ink data-[state=active]:bg-brand-ink data-[state=active]:text-brand-paper transition-colors"
+                                className="rounded-full px-6 py-2 text-sm font-medium text-brand-ink data-[state=active]:bg-brand-ink data-[state=active]:text-brand-paper transition-colors cursor-pointer"
                             >
                                 Rules
                             </TabsTrigger>
                         </TabsList>
                     </div>
 
-                    <div className="relative aspect-video md:aspect-video lg:aspect-2/1 border border-brand-ink bg-brand-paper p-2 md:p-4 shadow-[8px_8px_0_var(--brand-coral)]">
+                    <div className="relative aspect-video md:aspect-video lg:aspect-2/1 border border-brand-ink bg-brand-paper p-2 md:p-4 shadow-[8px_8px_0_var(--brand-coral)] rounded-2xl">
                         {/* macOS-style Window Controls */}
                         <div className="absolute top-4 left-4 flex gap-2 z-20">
                             <div className="w-3 h-3 rounded-full bg-brand-coral border border-brand-ink" />
@@ -101,40 +99,40 @@ export function ProductDemo() {
                             <div className="w-3 h-3 rounded-full bg-brand-eucalyptus border border-brand-ink" />
                         </div>
 
-                        <div className="w-full h-full bg-brand-paper border border-brand-ink overflow-hidden relative">
+                        <div className="w-full h-full bg-brand-paper border border-brand-ink rounded-xl overflow-hidden relative">
                             <TabsContent value="dashboard" className="h-full mt-0 p-6 md:p-10">
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.4 }}
+                                    transition={{ type: "spring", stiffness: 100, damping: 20 }}
                                     className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full"
                                 >
-                                    <div className="bg-brand-ink text-brand-paper border border-brand-ink p-6 flex flex-col justify-between">
+                                    <div className="bg-brand-ink text-brand-paper border border-brand-ink rounded-xl p-6 flex flex-col justify-between">
                                         <div className="flex items-center gap-3 mb-4">
-                                            <div className="p-2 bg-brand-coral text-brand-ink border border-brand-paper">
-                                                <Activity className="w-5 h-5" />
+                                            <div className="p-2 bg-brand-coral text-brand-ink border border-brand-paper rounded-lg">
+                                                <ActivityLogIcon className="w-5 h-5" />
                                             </div>
-                                            <span className="font-medium">Work moving</span>
+                                            <span className="font-medium text-sm font-mono">Work moving</span>
                                         </div>
                                         <div className="space-y-2">
                                             <div className="h-2 w-full bg-brand-paper/20 rounded-full overflow-hidden">
                                                 <motion.div initial={{ width: 0 }} animate={{ width: "75%" }} transition={{ duration: 1, delay: 0.2 }} className="h-full bg-brand-coral rounded-full" />
                                             </div>
-                                            <div className="flex justify-between text-xs text-brand-paper/70">
+                                            <div className="flex justify-between text-xs font-mono text-brand-paper/70">
                                                 <span>On track</span>
                                                 <span>12 jobs handled</span>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="bg-brand-eucalyptus text-brand-ink border border-brand-ink p-4 flex min-h-60 flex-col">
+                                    <div className="bg-brand-eucalyptus text-brand-ink border border-brand-ink rounded-xl p-4 flex min-h-60 flex-col">
                                         <div className="flex items-center gap-3 mb-4">
-                                            <div className="p-2 bg-brand-paper text-brand-ink border border-brand-ink">
-                                                <Workflow className="w-5 h-5" />
+                                            <div className="p-2 bg-brand-paper text-brand-ink border border-brand-ink rounded-lg">
+                                                <GearIcon className="w-5 h-5" />
                                             </div>
                                             <div>
-                                                <div className="font-medium">One trigger. Job handled.</div>
-                                                <div className="text-xs text-brand-ink/65">No copying between tools</div>
+                                                <div className="font-medium text-sm">One trigger. Job handled.</div>
+                                                <div className="text-xs font-mono text-brand-ink/65">No copying between tools</div>
                                             </div>
                                         </div>
                                         <WorkflowMap />
@@ -146,12 +144,12 @@ export function ProductDemo() {
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.4 }}
+                                    transition={{ type: "spring", stiffness: 100, damping: 20 }}
                                     className="flex items-center justify-center h-full"
                                 >
                                     <div className="text-center">
                                         <div className="mb-4 inline-flex p-4 rounded-full bg-brand-eucalyptus text-brand-ink border border-brand-ink">
-                                            <Layers className="w-8 h-8" />
+                                            <LayersIcon className="w-8 h-8" />
                                         </div>
                                         <h3 className="text-xl font-bold mb-2">Time back</h3>
                                         <p className="text-sm text-muted-foreground">See which jobs were handled and where the week got easier.</p>
@@ -163,15 +161,15 @@ export function ProductDemo() {
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.4 }}
-                                    className="max-w-md mx-auto space-y-4 bg-brand-ink p-4"
+                                    transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                                    className="max-w-md mx-auto space-y-4 bg-brand-ink p-4 rounded-xl"
                                 >
                                     {SETTINGS_RULES.map((i) => (
                                         <div
                                             key={i}
-                                            className="flex items-center justify-between border border-brand-ink bg-brand-paper p-4"
+                                            className="flex items-center justify-between border border-brand-ink bg-brand-paper p-4 rounded-lg"
                                         >
-                                            <span className="text-sm font-medium">Workflow rule {i}</span>
+                                            <span className="text-sm font-medium font-mono">Workflow rule {i}</span>
                                             <div className="relative h-6 w-10 rounded-full border border-brand-ink bg-brand-paper">
                                                 <div className="absolute right-1 top-1 h-4 w-4 rounded-full border border-brand-ink bg-brand-eucalyptus" />
                                             </div>
@@ -284,7 +282,7 @@ function WorkflowMap() {
                             <div
                                 key={label}
                                 className={cn(
-                                    "flex items-center gap-2 border border-brand-ink px-2 py-2 text-[10px] font-medium transition-colors sm:text-xs",
+                                    "flex items-center gap-2 border border-brand-ink px-2 py-2 text-[10px] font-mono font-medium transition-colors sm:text-xs rounded-lg",
                                     index === 0 && phase >= 1 ? "bg-brand-coral" : "bg-brand-paper"
                                 )}
                             >
@@ -302,7 +300,7 @@ function WorkflowMap() {
                             phase >= 2 ? "bg-brand-eucalyptus" : "bg-brand-paper"
                         )}
                     >
-                        <Workflow className="h-5 w-5" aria-hidden="true" />
+                        <GearIcon className="h-5 w-5" aria-hidden="true" />
                     </motion.div>
 
                     <div className="space-y-2">
@@ -310,7 +308,7 @@ function WorkflowMap() {
                             <div
                                 key={label}
                                 className={cn(
-                                    "flex items-center gap-2 border border-brand-ink px-2 py-2 text-[10px] font-medium transition-colors sm:text-xs",
+                                    "flex items-center gap-2 border border-brand-ink px-2 py-2 text-[10px] font-mono font-medium transition-colors sm:text-xs rounded-lg",
                                     phase >= 3 ? "bg-brand-ink text-brand-paper" : "bg-brand-paper text-brand-ink"
                                 )}
                             >
@@ -323,7 +321,7 @@ function WorkflowMap() {
             </div>
 
             <div className="mt-2 flex items-center justify-between gap-3 border-t border-brand-ink/20 pt-3">
-                <p id="workflow-status" role="status" aria-live="polite" className="text-[10px] text-brand-ink/70 sm:text-xs">
+                <p id="workflow-status" role="status" aria-live="polite" className="text-[10px] font-mono text-brand-ink/70 sm:text-xs">
                     {status}
                 </p>
                 <Button
@@ -332,7 +330,7 @@ function WorkflowMap() {
                     onClick={runWorkflow}
                     disabled={isRunning}
                     aria-describedby="workflow-status"
-                    className="shrink-0 rounded-full bg-brand-ink px-4 text-brand-paper hover:bg-brand-coral hover:text-brand-ink focus-visible:outline-brand-coral disabled:cursor-wait disabled:opacity-60"
+                    className="shrink-0 rounded-full bg-brand-ink px-4 text-brand-paper hover:bg-brand-coral hover:text-brand-ink focus-visible:outline-brand-coral disabled:cursor-wait disabled:opacity-60 cursor-pointer font-mono text-xs"
                 >
                     {isRunning ? "Running…" : phase === 4 ? "Run again" : "Run it"}
                 </Button>
