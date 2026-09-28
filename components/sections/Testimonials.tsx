@@ -52,7 +52,7 @@ export function Testimonials() {
                             <Card className="h-full border-brand-ink bg-brand-paper shadow-[4px_4px_0_var(--brand-ink)]">
                                 <CardContent className="p-8 flex flex-col justify-between h-full">
                                     <div className="mb-6">
-                                        <div className="text-4xl text-brand-coral font-serif leading-none mb-4">“</div>
+                                        <div className="text-4xl text-brand-coral font-sans leading-none mb-4">“</div>
                                         <p className="text-lg leading-relaxed">{t.quote}</p>
                                     </div>
                                     <div className="flex items-center gap-4">

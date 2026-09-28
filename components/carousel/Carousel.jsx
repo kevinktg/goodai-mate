@@ -1287,7 +1287,7 @@ export default function Carousel() {
   return (
     <section
       aria-label="Good'Ai work and services"
-      className="relative isolate h-screen min-h-[640px] overflow-hidden bg-[var(--paper)]"
+      className="relative isolate h-[100dvh] min-h-[640px] overflow-hidden bg-[var(--paper)]"
       style={{
         "--ink": "var(--brand-ink)",
         "--paper": "var(--brand-paper)",
