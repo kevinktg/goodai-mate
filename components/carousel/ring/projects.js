@@ -1,4 +1,4 @@
-// Ring order is the public GoodAI service narrative. Each image is a
+// Ring order is the public Good'Ai service narrative. Each image is a
 // source-faithful Figma export owned by this project; the unlicensed sample
 // artwork from the upstream demo is intentionally not vendored.
 export const PROJECTS = [
