@@ -7,7 +7,7 @@ interface TextScrambleProps {
     className?: string;
 }
 
-const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ9876543210!@#$%^&*()";
 
 export function TextScramble({ children, className }: TextScrambleProps) {
     const [displayText, setDisplayText] = useState(children);
