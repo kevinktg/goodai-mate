@@ -36,7 +36,7 @@ export default function RootLayout({
         <SmoothScroll>
           <Noise />
           <Navbar />
-          <main className="min-h-screen">
+          <main className="min-h-[100dvh]">
             {children}
           </main>
           <Script src="https://elevenlabs.io/convai-widget/index.js" strategy="afterInteractive" />
