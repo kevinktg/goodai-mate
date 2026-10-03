@@ -18,7 +18,7 @@ export function InfiniteMarquee({
     items = DEFAULT_ITEMS
 }: InfiniteMarqueeProps) {
 
-    // ⚡ Bolt: Memoize the rendered items to avoid O(N) operations and
+    // Bolt: Memoize the rendered items to avoid O(N) operations and
     // redundant DOM element re-creations on every render.
     const renderedItems = useMemo(() => {
         return [...items, ...items, ...items, ...items].map((item, i) => (
