@@ -10,3 +10,6 @@
 ## 2024-05-24 - Memoize Inline Maps
 **Learning:** Hardcoded arrays placed directly inside functional components are recreated on every render, causing React to unnecessarily recreate elements during list mappings.
 **Action:** Extract inline constant arrays to module scope and wrap their list mappings with `useMemo` to prevent redundant O(N) operations and minimize DOM reconciliation overhead.
+## 2026-10-05 - Avoid React State for High-Frequency Mouse Tracking in Framer Motion Components
+**Learning:** Updating React state (`useState`) during `mousemove` events causes full component re-renders on every frame (up to 120Hz/240Hz), causing main thread layout/paint thrashing.
+**Action:** Use Framer Motion's `useMotionValue` and `useSpring` to update motion transform values directly (`x.set(...)`, `y.set(...)`) outside React's render lifecycle.
