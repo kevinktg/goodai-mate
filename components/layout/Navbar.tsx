@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -20,25 +20,21 @@ export function Navbar() {
     const { scrollY } = useScroll();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isHidden, setIsHidden] = useState(false);
-    const [lastScrollY, setLastScrollY] = useState(0);
+    // OPTIMIZATION: Use a ref instead of useState for lastScrollY.
+    // Storing lastScrollY in state triggered a full Navbar re-render on EVERY scroll frame (~60-120Hz).
+    // Using a ref avoids state updates during scroll, and functional state updates ensure
+    // isScrolled and isHidden only trigger re-renders when their boolean values actually change.
+    const lastScrollY = useRef(0);
 
     useMotionValueEvent(scrollY, "change", (latest) => {
-        const previous = lastScrollY;
-        setLastScrollY(latest);
+        const previous = lastScrollY.current;
+        lastScrollY.current = latest;
 
-        // Check if scrolled down for floating effect
-        if (latest > 100) {
-            setIsScrolled(true);
-        } else {
-            setIsScrolled(false);
-        }
+        const nextIsScrolled = latest > 100;
+        const nextIsHidden = latest > previous && latest > 150;
 
-        // Hide/Show logic on scroll direction
-        if (latest > previous && latest > 150) {
-            setIsHidden(true);
-        } else {
-            setIsHidden(false);
-        }
+        setIsScrolled((prev) => (prev !== nextIsScrolled ? nextIsScrolled : prev));
+        setIsHidden((prev) => (prev !== nextIsHidden ? nextIsHidden : prev));
     });
 
     return (

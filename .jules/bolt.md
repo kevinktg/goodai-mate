@@ -13,3 +13,7 @@
 ## 2026-10-05 - Avoid React State for High-Frequency Mouse Tracking in Framer Motion Components
 **Learning:** Updating React state (`useState`) during `mousemove` events causes full component re-renders on every frame (up to 120Hz/240Hz), causing main thread layout/paint thrashing.
 **Action:** Use Framer Motion's `useMotionValue` and `useSpring` to update motion transform values directly (`x.set(...)`, `y.set(...)`) outside React's render lifecycle.
+
+## 2026-10-06 - Avoid React State for High-Frequency Scroll Position Tracking in Event Listeners
+**Learning:** Storing previous scroll positions in React state (`useState`) during `scrollY` changes triggers component re-renders on every scroll tick (~60-120Hz), thrashing the main thread.
+**Action:** Use `useRef` for tracking scroll values across frames and apply functional equality checks before updating boolean UI state (like `isScrolled` or `isHidden`).
