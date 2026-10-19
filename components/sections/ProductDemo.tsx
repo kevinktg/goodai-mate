@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 import {
     Activity,
@@ -31,7 +32,11 @@ const workflowOutputs = [
 
 // PERFORMANCE PATTERN: Extract static arrays to the module scope to avoid recreating them on every render
 // This preserves referential equality and reduces garbage collection overhead in functional components.
-const SETTINGS_RULES = [1, 2, 3];
+const SETTINGS_RULES = [
+    { id: "rule-1", label: "Auto-reply to email enquiries", defaultActive: true },
+    { id: "rule-2", label: "Check calendar before booking", defaultActive: true },
+    { id: "rule-3", label: "Notify team when job created", defaultActive: false },
+];
 const WORKFLOW_INPUT_PATHS = [
     "M 28 18 C 39 18 39 50 50 50",
     "M 28 50 H 50",
@@ -52,6 +57,10 @@ const WORKFLOW_STATUS_MESSAGES = [
 ];
 
 export function ProductDemo() {
+    const [rules, setRules] = useState<Record<string, boolean>>(() =>
+        Object.fromEntries(SETTINGS_RULES.map((r) => [r.id, r.defaultActive]))
+    );
+
     return (
         <section id="demo" className="py-24 px-6 bg-brand-paper text-brand-ink overflow-hidden">
             <div className="max-w-7xl mx-auto">
@@ -166,16 +175,23 @@ export function ProductDemo() {
                                     transition={{ duration: 0.4 }}
                                     className="max-w-md mx-auto space-y-4 bg-brand-ink p-4"
                                 >
-                                    {SETTINGS_RULES.map((i) => (
-                                        <div
-                                            key={i}
-                                            className="flex items-center justify-between border border-brand-ink bg-brand-paper p-4"
+                                    {SETTINGS_RULES.map((rule) => (
+                                        <label
+                                            key={rule.id}
+                                            htmlFor={rule.id}
+                                            className="flex items-center justify-between border border-brand-ink bg-brand-paper p-4 cursor-pointer hover:bg-brand-paper/95 transition-colors select-none"
                                         >
-                                            <span className="text-sm font-medium">Workflow rule {i}</span>
-                                            <div className="relative h-6 w-10 rounded-full border border-brand-ink bg-brand-paper">
-                                                <div className="absolute right-1 top-1 h-4 w-4 rounded-full border border-brand-ink bg-brand-eucalyptus" />
-                                            </div>
-                                        </div>
+                                            <span className="text-sm font-medium text-brand-ink pr-4">{rule.label}</span>
+                                            <Switch
+                                                id={rule.id}
+                                                checked={rules[rule.id]}
+                                                onCheckedChange={(checked) =>
+                                                    setRules((prev) => ({ ...prev, [rule.id]: checked }))
+                                                }
+                                                aria-label={rule.label}
+                                                className="data-[state=checked]:bg-brand-eucalyptus data-[state=unchecked]:bg-brand-paper/60 border border-brand-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-coral"
+                                            />
+                                        </label>
                                     ))}
                                 </motion.div>
                             </TabsContent>

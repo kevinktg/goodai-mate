@@ -17,3 +17,7 @@ Apply `public/assets/shapes/shape-big-*.svg` as backgrounds to every 2nd viewpor
 ## 2024-09-10 - Missing Focus Rings on Framer Motion Buttons
 **Learning:** Custom interactive UI components built with wrappers like Framer Motion (`<motion.button>`) or generic primitives (`SheetClose` without default focus styles) often lack default browser focus rings.
 **Action:** Always append explicit `focus-visible` utility classes (e.g., `focus-visible:outline-2 focus-visible:outline-brand-coral outline-none`) to these custom components to maintain keyboard accessibility.
+
+## 2026-03-30 - Non-Interactive Simulated Toggles in Product Demos
+**Learning:** Simulated settings or rule controls in interactive product demos rendered as plain `div` elements lack screen reader roles (`role="switch"`), keyboard operability, and semantic label association, confusing users who expect demo components to interact realistically.
+**Action:** Always implement interactive controls in product demos using accessible primitives (such as Radix UI `<Switch>`) wrapped in semantic `<label htmlFor="...">` with active state and explicit `focus-visible` outline classes.
