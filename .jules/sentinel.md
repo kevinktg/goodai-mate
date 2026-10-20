@@ -1,0 +1,4 @@
+## 2026-10-20 - HTTP Security Headers and CSP Policy Configuration
+**Vulnerability:** Lack of explicit HTTP security headers and Content Security Policy (CSP) on responses, making the web application susceptible to clickjacking (frame embedding), MIME-type sniffing, cross-site scripting (XSS), and unencrypted protocol downgrades.
+**Learning:** Next.js static and dynamic responses require explicit configuration in `next.config.ts` via `headers()` to enforce strict response header protection across routes. Third-party widgets like ElevenLabs (`elevenlabs.io`) and Google Form embeds/redirects (`docs.google.com`) must be explicitly permitted in `connect-src`, `script-src`, and `form-action` CSP directives.
+**Prevention:** Always define centralized HTTP security headers (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `Strict-Transport-Security`, `Content-Security-Policy`) in `next.config.ts`.
