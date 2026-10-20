@@ -114,14 +114,14 @@ export function Navbar() {
                     </Button>
                     <Sheet>
                         <SheetTrigger asChild>
-                            <Button variant="ghost" size="icon" className="rounded-full" aria-label="Open menu">
+                            <Button variant="ghost" size="icon" className="rounded-full focus-visible:ring-2 focus-visible:ring-brand-coral focus-visible:ring-offset-2" aria-label="Open menu">
                                 <Menu className="w-5 h-5" />
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="top" className="w-full h-full bg-brand-paper text-brand-ink border-none p-0">
                             <SheetTitle className="sr-only">Menu</SheetTitle>
                             <div className="flex flex-col h-full items-center justify-center relative">
-                                <SheetClose className="absolute top-6 right-6" aria-label="Close menu">
+                                <SheetClose className="absolute top-6 right-6 focus-visible:ring-2 focus-visible:ring-brand-coral focus-visible:ring-offset-2 rounded-full p-1" aria-label="Close menu">
                                     <X className="w-6 h-6" />
                                 </SheetClose>
                                 <div className="flex flex-col gap-8 text-center">
