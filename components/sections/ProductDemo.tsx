@@ -74,19 +74,19 @@ export function ProductDemo() {
                         <TabsList className="bg-brand-paper p-1 rounded-full border border-brand-ink">
                             <TabsTrigger
                                 value="dashboard"
-                                className="rounded-full px-6 py-2 text-sm font-medium text-brand-ink data-[state=active]:bg-brand-ink data-[state=active]:text-brand-paper transition-colors"
+                                className="rounded-full px-6 py-2 text-sm font-medium text-brand-ink data-[state=active]:bg-brand-ink data-[state=active]:text-brand-paper transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-coral"
                             >
                                 Today
                             </TabsTrigger>
                             <TabsTrigger
                                 value="analytics"
-                                className="rounded-full px-6 py-2 text-sm font-medium text-brand-ink data-[state=active]:bg-brand-ink data-[state=active]:text-brand-paper transition-colors"
+                                className="rounded-full px-6 py-2 text-sm font-medium text-brand-ink data-[state=active]:bg-brand-ink data-[state=active]:text-brand-paper transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-coral"
                             >
                                 Jobs
                             </TabsTrigger>
                             <TabsTrigger
                                 value="settings"
-                                className="rounded-full px-6 py-2 text-sm font-medium text-brand-ink data-[state=active]:bg-brand-ink data-[state=active]:text-brand-paper transition-colors"
+                                className="rounded-full px-6 py-2 text-sm font-medium text-brand-ink data-[state=active]:bg-brand-ink data-[state=active]:text-brand-paper transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-coral"
                             >
                                 Rules
                             </TabsTrigger>
