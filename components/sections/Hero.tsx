@@ -56,7 +56,7 @@ export function Hero() {
                         Repetitive Admin?
                     </MagneticButton>
                     <MagneticButton onClick={() => window.location.assign(SURVEY_URL)} className="flex items-center text-sm uppercase tracking-widest text-brand-paper/75 hover:text-brand-paper transition-colors group px-6 py-4">
-                        Let us sort it <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                        Let us sort it <ArrowRight aria-hidden="true" className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </MagneticButton>
                 </motion.div>
             </div>

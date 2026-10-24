@@ -47,6 +47,7 @@ export function MagneticButton({
     return (
         <motion.button
             ref={ref}
+            type="button"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={{ x: springX, y: springY, ...style }}
