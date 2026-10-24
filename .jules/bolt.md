@@ -17,3 +17,7 @@
 ## 2026-10-06 - Avoid React State for High-Frequency Scroll Position Tracking in Event Listeners
 **Learning:** Storing previous scroll positions in React state (`useState`) during `scrollY` changes triggers component re-renders on every scroll tick (~60-120Hz), thrashing the main thread.
 **Action:** Use `useRef` for tracking scroll values across frames and apply functional equality checks before updating boolean UI state (like `isScrolled` or `isHidden`).
+
+## 2026-10-07 - Avoid Redundant State Dispatches & Duplicate Scroll Listeners in Scroll-Triggered Floating Widgets
+**Learning:** Calling `setState` unconditionally in high-frequency scroll listeners triggers React component re-renders on every scroll frame (60–120Hz). Additionally, registering scroll listeners on both smooth scroll wrappers (Lenis) and `window` doubles event execution frequency.
+**Action:** Use a `useRef` boolean to check current state before calling `setState(false)`, and conditionally bind only to Lenis scroll if available or `window` as a fallback.
