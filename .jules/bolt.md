@@ -17,3 +17,7 @@
 ## 2026-10-06 - Avoid React State for High-Frequency Scroll Position Tracking in Event Listeners
 **Learning:** Storing previous scroll positions in React state (`useState`) during `scrollY` changes triggers component re-renders on every scroll tick (~60-120Hz), thrashing the main thread.
 **Action:** Use `useRef` for tracking scroll values across frames and apply functional equality checks before updating boolean UI state (like `isScrolled` or `isHidden`).
+
+## 2026-10-06 - Prevent Event Listener Thrashing in High-Frequency Motion Components
+**Learning:** Including React state (like `isVisible`) in a `useEffect` dependency array alongside mouse tracking handlers forces event listeners to unbind and re-attach on every visibility transition.
+**Action:** Drive visibility and opacity via Framer Motion `useMotionValue` (e.g., `opacity.set(1)`), allowing `useEffect` event listeners to remain bound with empty `[]` dependencies without lifecycle teardown/re-binding.
