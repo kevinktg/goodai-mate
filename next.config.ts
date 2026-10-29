@@ -25,6 +25,18 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(self \"https://elevenlabs.io\"), geolocation=()",
   },
+  {
+    key: "X-XSS-Protection",
+    value: "1; mode=block",
+  },
+  {
+    key: "X-Permitted-Cross-Domain-Policies",
+    value: "none",
+  },
+  {
+    key: "Cross-Origin-Opener-Policy",
+    value: "same-origin",
+  },
 ];
 
 const nextConfig: NextConfig = {
