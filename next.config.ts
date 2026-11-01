@@ -1,6 +1,26 @@
 import type { NextConfig } from "next";
 
+// Content Security Policy directive definition
+// Mitigates XSS, data injection, and clickjacking attacks
+const cspHeader = `
+  default-src 'self';
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' https://elevenlabs.io;
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' blob: data:;
+  font-src 'self' data:;
+  object-src 'none';
+  base-uri 'self';
+  form-action 'self' https://docs.google.com;
+  frame-src 'self' https://elevenlabs.io;
+  connect-src 'self' https://elevenlabs.io wss://*.elevenlabs.io;
+  upgrade-insecure-requests;
+`.replace(/\s{2,}/g, " ").trim();
+
 const securityHeaders = [
+  {
+    key: "Content-Security-Policy",
+    value: cspHeader,
+  },
   {
     key: "X-DNS-Prefetch-Control",
     value: "on",
@@ -23,7 +43,7 @@ const securityHeaders = [
   },
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(self \"https://elevenlabs.io\"), geolocation=()",
+    value: 'camera=(), microphone=(self "https://elevenlabs.io"), geolocation=()',
   },
 ];
 
