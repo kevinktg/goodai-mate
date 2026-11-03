@@ -34,9 +34,15 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground overflow-x-hidden selection:bg-brand-coral selection:text-brand-ink`}
       >
         <SmoothScroll>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-full focus:bg-brand-coral focus:text-brand-ink focus:font-medium focus:shadow-[4px_4px_0_var(--brand-ink)] focus:outline-none focus:ring-2 focus:ring-brand-ink transition-transform"
+          >
+            Skip to content
+          </a>
           <Noise />
           <Navbar />
-          <main className="min-h-[100dvh]">
+          <main id="main-content" tabIndex={-1} className="min-h-[100dvh] focus:outline-none">
             {children}
           </main>
           <Script src="https://elevenlabs.io/convai-widget/index.js" strategy="afterInteractive" />
