@@ -1,6 +1,28 @@
 import type { NextConfig } from "next";
 
+// Security enhancement: Content-Security-Policy (CSP) provides defense-in-depth against
+// Cross-Site Scripting (XSS), clickjacking, and unauthorized data exfiltration.
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://elevenlabs.io",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob:",
+  "font-src 'self'",
+  "connect-src 'self' https://elevenlabs.io wss://*.elevenlabs.io",
+  "frame-src 'self' https://elevenlabs.io",
+  "form-action 'self' https://docs.google.com",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "object-src 'none'",
+]
+  .join("; ")
+  .trim();
+
 const securityHeaders = [
+  {
+    key: "Content-Security-Policy",
+    value: contentSecurityPolicy,
+  },
   {
     key: "X-DNS-Prefetch-Control",
     value: "on",
