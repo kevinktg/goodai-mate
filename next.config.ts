@@ -1,6 +1,24 @@
 import type { NextConfig } from "next";
 
+// Defense-in-depth CSP policy accommodating ElevenLabs ConvAI widget and external form actions
+const contentSecurityPolicy = `
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://elevenlabs.io;
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' data: blob:;
+  font-src 'self' data:;
+  connect-src 'self' https://elevenlabs.io wss://*.elevenlabs.io;
+  frame-src 'self' https://elevenlabs.io;
+  form-action 'self' https://docs.google.com;
+  frame-ancestors 'none';
+  upgrade-insecure-requests;
+`.replace(/\s{2,}/g, " ").trim();
+
 const securityHeaders = [
+  {
+    key: "Content-Security-Policy",
+    value: contentSecurityPolicy,
+  },
   {
     key: "X-DNS-Prefetch-Control",
     value: "on",
