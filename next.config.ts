@@ -46,6 +46,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Prevent technology fingerprinting and information disclosure via X-Powered-By header
+  poweredByHeader: false,
   async headers() {
     return [
       {
