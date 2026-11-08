@@ -3,6 +3,8 @@ import type { NextConfig } from "next";
 // Defense-in-depth CSP policy accommodating ElevenLabs ConvAI widget and external form actions
 const contentSecurityPolicy = `
   default-src 'self';
+  base-uri 'self';
+  object-src 'none';
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://elevenlabs.io;
   style-src 'self' 'unsafe-inline';
   img-src 'self' data: blob:;
@@ -38,6 +40,10 @@ const securityHeaders = [
   {
     key: "Referrer-Policy",
     value: "strict-origin-when-cross-origin",
+  },
+  {
+    key: "X-Permitted-Cross-Domain-Policies",
+    value: "none",
   },
   {
     key: "Permissions-Policy",
