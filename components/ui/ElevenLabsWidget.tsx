@@ -9,29 +9,31 @@ export function ElevenLabsWidget() {
   const lenis = useLenis();
 
   useEffect(() => {
-    let scrollTimeout: NodeJS.Timeout;
+    let scrollTimeout: ReturnType<typeof setTimeout>;
 
+    // OPTIMIZATION:
+    // 1. Avoid duplicate event handlers: when Lenis is active, do not also register a window 'scroll' listener.
+    // 2. Functional state check prevents redundant React re-renders while continuous scroll events fire:
+    //    if isVisible is already false, skip state updates.
     const handleScroll = () => {
-      setIsVisible(false);
+      setIsVisible((prev) => (prev ? false : prev));
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
-        setIsVisible(true);
+        setIsVisible((prev) => (!prev ? true : prev));
       }, 500); // 500ms delay after scrolling stops
     };
 
     if (lenis) {
-        lenis.on('scroll', handleScroll);
-        window.addEventListener("scroll", handleScroll, { passive: true });
+      lenis.on("scroll", handleScroll);
     } else {
-        window.addEventListener("scroll", handleScroll, { passive: true });
+      window.addEventListener("scroll", handleScroll, { passive: true });
     }
 
     return () => {
       if (lenis) {
-          lenis.off('scroll', handleScroll);
-          window.removeEventListener("scroll", handleScroll);
+        lenis.off("scroll", handleScroll);
       } else {
-          window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("scroll", handleScroll);
       }
       clearTimeout(scrollTimeout);
     };
