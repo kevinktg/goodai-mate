@@ -11,6 +11,8 @@ const contentSecurityPolicy = `
   frame-src 'self' https://elevenlabs.io;
   form-action 'self' https://docs.google.com;
   frame-ancestors 'none';
+  base-uri 'self';
+  object-src 'none';
   upgrade-insecure-requests;
 `.replace(/\s{2,}/g, " ").trim();
 
@@ -42,6 +44,14 @@ const securityHeaders = [
   {
     key: "Permissions-Policy",
     value: "camera=(), microphone=(self \"https://elevenlabs.io\"), geolocation=()",
+  },
+  {
+    key: "Cross-Origin-Opener-Policy",
+    value: "same-origin",
+  },
+  {
+    key: "Cross-Origin-Resource-Policy",
+    value: "same-origin",
   },
 ];
 
