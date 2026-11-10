@@ -1,23 +1,30 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
+// PERFORMANCE OPTIMIZATION:
+// 1. Extract static spring physics configuration to module scope to prevent object reallocation on render.
+// 2. Use Framer Motion's `opacity` motion value instead of React `useState(false)`.
+//    This updates DOM styles directly outside React's render loop, eliminating component re-renders
+//    and preventing global event listener teardown/re-subscription on window during mouse movement.
+const SPRING_CONFIG = { damping: 25, stiffness: 700 };
+
 export function CustomCursor() {
-    const [isVisible, setIsVisible] = useState(false);
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
+    const opacity = useMotionValue(0);
 
-    // Smooth spring physics for the cursor
-    const springConfig = { damping: 25, stiffness: 700 };
-    const cursorX = useSpring(mouseX, springConfig);
-    const cursorY = useSpring(mouseY, springConfig);
+    const cursorX = useSpring(mouseX, SPRING_CONFIG);
+    const cursorY = useSpring(mouseY, SPRING_CONFIG);
 
     useEffect(() => {
         const moveCursor = (e: MouseEvent) => {
             mouseX.set(e.clientX - 16); // Center the 32px cursor
             mouseY.set(e.clientY - 16);
-            if (!isVisible) setIsVisible(true);
+            if (opacity.get() !== 1) {
+                opacity.set(1);
+            }
         };
 
         const handleMouseDown = () => document.body.classList.add("cursor-clicking");
@@ -32,7 +39,7 @@ export function CustomCursor() {
             window.removeEventListener("mousedown", handleMouseDown);
             window.removeEventListener("mouseup", handleMouseUp);
         };
-    }, [mouseX, mouseY, isVisible]);
+    }, [mouseX, mouseY, opacity]);
 
     return (
         <motion.div
@@ -40,7 +47,7 @@ export function CustomCursor() {
             style={{
                 x: cursorX,
                 y: cursorY,
-                opacity: isVisible ? 1 : 0,
+                opacity,
             }}
         >
             {/* Optional: Small inner dot or ring */}
