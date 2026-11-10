@@ -40,6 +40,12 @@ export default function RootLayout({
           Skip to content
         </a>
         <SmoothScroll>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] rounded-full bg-brand-coral px-6 py-2.5 text-sm font-medium text-brand-ink border border-brand-ink shadow-[3px_3px_0_var(--brand-ink)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink transition-transform"
+          >
+            Skip to main content
+          </a>
           <Noise />
           <Navbar />
           <main id="main-content" tabIndex={-1} className="min-h-[100dvh] outline-none">
