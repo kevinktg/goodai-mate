@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 import {
     Activity,
@@ -50,6 +51,47 @@ const WORKFLOW_STATUS_MESSAGES = [
     "Booking the job and sending updates.",
     "Done. Everyone is updated.",
 ];
+
+function RulesTab() {
+    const [activeRules, setActiveRules] = useState<Record<number, boolean>>({
+        1: true,
+        2: true,
+        3: false,
+    });
+
+    const toggleRule = (id: number) => {
+        setActiveRules((prev) => ({ ...prev, [id]: !prev[id] }));
+    };
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4 }}
+            className="max-w-md mx-auto space-y-4 bg-brand-ink p-4"
+        >
+            {SETTINGS_RULES.map((i) => (
+                <div
+                    key={i}
+                    className="flex items-center justify-between border border-brand-ink bg-brand-paper p-4"
+                >
+                    <label
+                        htmlFor={`rule-switch-${i}`}
+                        className="text-sm font-medium cursor-pointer"
+                    >
+                        Workflow rule {i}
+                    </label>
+                    <Switch
+                        id={`rule-switch-${i}`}
+                        checked={activeRules[i]}
+                        onCheckedChange={() => toggleRule(i)}
+                        className="data-[state=checked]:bg-brand-eucalyptus data-[state=unchecked]:bg-brand-ink/20 border border-brand-ink focus-visible:ring-2 focus-visible:ring-brand-coral"
+                    />
+                </div>
+            ))}
+        </motion.div>
+    );
+}
 
 export function ProductDemo() {
     return (
@@ -160,24 +202,7 @@ export function ProductDemo() {
                             </TabsContent>
 
                             <TabsContent value="settings" className="h-full mt-0 p-6 md:p-10">
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.4 }}
-                                    className="max-w-md mx-auto space-y-4 bg-brand-ink p-4"
-                                >
-                                    {SETTINGS_RULES.map((i) => (
-                                        <div
-                                            key={i}
-                                            className="flex items-center justify-between border border-brand-ink bg-brand-paper p-4"
-                                        >
-                                            <span className="text-sm font-medium">Workflow rule {i}</span>
-                                            <div className="relative h-6 w-10 rounded-full border border-brand-ink bg-brand-paper">
-                                                <div className="absolute right-1 top-1 h-4 w-4 rounded-full border border-brand-ink bg-brand-eucalyptus" />
-                                            </div>
-                                        </div>
-                                    ))}
-                                </motion.div>
+                                <RulesTab />
                             </TabsContent>
                         </div>
                     </div>
