@@ -17,3 +17,7 @@ Apply `public/assets/shapes/shape-big-*.svg` as backgrounds to every 2nd viewpor
 ## 2024-09-10 - Missing Focus Rings on Framer Motion Buttons
 **Learning:** Custom interactive UI components built with wrappers like Framer Motion (`<motion.button>`) or generic primitives (`SheetClose` without default focus styles) often lack default browser focus rings.
 **Action:** Always append explicit `focus-visible` utility classes (e.g., `focus-visible:outline-2 focus-visible:outline-brand-coral outline-none`) to these custom components to maintain keyboard accessibility.
+
+## 2026-03-30 - Dynamically Hiding Overlays from Screen Readers
+**Learning:** Floating widgets and overlays toggled visually (e.g., using `opacity-0` and `pointer-events-none` during scroll) remain exposed in the accessibility tree unless `aria-hidden` reflects their visibility state.
+**Action:** Always pair visual visibility toggles (`opacity-0`, `pointer-events-none`) with `aria-hidden={!isVisible}` on the container element to keep screen reader navigation synchronized with visual state.
