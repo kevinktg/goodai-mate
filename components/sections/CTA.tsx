@@ -34,7 +34,7 @@ export function CTA() {
                     transition={{ duration: 0.8, delay: 0.2 }}
                 >
                     <Button asChild size="lg" className="rounded-full px-10 h-14 text-lg bg-brand-coral text-brand-ink hover:bg-brand-paper focus-visible:outline-brand-coral transition-colors shadow-[4px_4px_0_var(--brand-paper)]">
-                        <a href={SURVEY_URL}>Tell us your problem <ArrowRight className="ml-2 w-5 h-5" /></a>
+                        <a href={SURVEY_URL}>Tell us your problem <ArrowRight aria-hidden="true" className="ml-2 w-5 h-5" /></a>
                     </Button>
                 </motion.div>
             </div>

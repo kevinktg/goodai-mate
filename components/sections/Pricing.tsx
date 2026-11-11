@@ -23,7 +23,7 @@ export function Pricing() {
     const renderedExecutiveItems = useMemo(() => {
         return EXECUTIVE_ITEMS.map(item => (
             <li key={item} className="flex items-center gap-3">
-                <Check className="w-4 h-4 text-brand-coral" /> {item}
+                <Check aria-hidden="true" className="w-4 h-4 text-brand-coral" /> {item}
             </li>
         ));
     }, []);
