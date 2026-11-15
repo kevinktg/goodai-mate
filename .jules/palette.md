@@ -17,3 +17,7 @@ Apply `public/assets/shapes/shape-big-*.svg` as backgrounds to every 2nd viewpor
 ## 2024-09-10 - Missing Focus Rings on Framer Motion Buttons
 **Learning:** Custom interactive UI components built with wrappers like Framer Motion (`<motion.button>`) or generic primitives (`SheetClose` without default focus styles) often lack default browser focus rings.
 **Action:** Always append explicit `focus-visible` utility classes (e.g., `focus-visible:outline-2 focus-visible:outline-brand-coral outline-none`) to these custom components to maintain keyboard accessibility.
+
+## 2026-03-31 - Accessible Names on Brand Links and Decorative SVG Hiding
+**Learning:** Stylized brand logo links often wrap text elements with custom styling or typography that screen readers can struggle to parse cleanly, and trailing arrow/check icons inside interactive buttons announce unnecessary visual noise unless explicitly hidden.
+**Action:** Provide explicit `aria-label` attributes on brand navigation links and mark decorative inline icons with `aria-hidden="true"`.
